@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
-use App\Models\Client;
+use App\Models\post;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,4 +27,17 @@ Route::get('/bio', function () {
 Route::get('/contacts', function () {
     return view('contacts');
 })->name('contacts');
+
+Route::get('/post/create', function(){
+    DB::table('post')-> insert([
+        'title'=> 'title',
+        'body'=> 'body'
+    ]);
+});
+
+Route::get('post', function(){
+$post= post::find(1);
+return $post;
+});
+
 
