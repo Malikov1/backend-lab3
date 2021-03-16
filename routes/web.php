@@ -29,12 +29,15 @@ Route::get('/contacts', function () {
     return view('contacts');
 })->name('contacts');
 
-Route::get('/post/create', function(){
-    DB::table('post')-> insert([
-        'title'=> 'TITLE',
-        'body'=> 'BODY'
-    ]);
-});
+// Route::get('/post/create', function(){
+//     DB::table('post')-> insert([
+//         'title'=> 'TITLE',
+//         'body'=> 'BODY'
+//     ]);
+// });
 
 Route::get('post', [BlogController::class, 'index']);
-
+Route::get('post/create', function(){
+     return view('blog.create');
+});
+Route::post('post/create', [BlogController::class, 'store'])->name('add-blog');
