@@ -18,5 +18,13 @@ class BlogController extends Controller
             'body' => $request->body
         ]);
         return back();
+    
+}
+public function get_post($id) {
+    $post = post::find($id);
+    if ($post == null) {
+        return response(['message' => 'post not found'], 404);
     }
+    return view('blog.detail')->with(['post' => $post]);
+}
 }
