@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use App\Models\post;
+use App\Http\Controllers\BlogController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,14 +31,10 @@ Route::get('/contacts', function () {
 
 Route::get('/post/create', function(){
     DB::table('post')-> insert([
-        'title'=> 'title',
-        'body'=> 'body'
+        'title'=> 'TITLE',
+        'body'=> 'BODY'
     ]);
 });
 
-Route::get('post', function(){
-$post= post::find(1);
-return $post;
-});
-
+Route::get('post', [BlogController::class, 'index']);
 
