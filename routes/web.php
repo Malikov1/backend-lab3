@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use App\Models\post;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\UploadController;
+use App\Mail\WelcomeMail;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,8 +18,11 @@ use App\Http\Controllers\BlogController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/welcome', function () {
+    Mail::to('email@email.com')->send(new WelcomeMail());
+    
+    
+    return new WelcomeMail();
 });
 
 Route::get('/education', function () {
@@ -29,12 +35,7 @@ Route::get('/contacts', function () {
     return view('contacts');
 })->name('contacts');
 
-// Route::get('/post/create', function(){
-//     DB::table('post')-> insert([
-//         'title'=> 'TITLE',
-//         'body'=> 'BODY'
-//     ]);
-// });
+
 
 Route::get('post', [BlogController::class, 'index']);
 Route::get('post/create', function(){
@@ -43,3 +44,5 @@ Route::get('post/create', function(){
 Route::post('post/create', [BlogController::class, 'store'])->name('add-blog');
 
 Route::get('/post/{id}', [BlogController::class, 'get_post']);
+Route::view('upload', 'upload');
+Route::post('upload', [UploadController::class,'index']);

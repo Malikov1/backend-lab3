@@ -23,4 +23,4 @@ class ApiController extends Controller
         return response($post, 200);
     }
 }
-}
+
