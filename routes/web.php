@@ -46,3 +46,7 @@ Route::post('post/create', [BlogController::class, 'store'])->name('add-blog');
 Route::get('/post/{id}', [BlogController::class, 'get_post']);
 Route::view('upload', 'upload');
 Route::post('upload', [UploadController::class,'index']);
+Route::get('/upload/{lang}', function($lang){
+    App::setlocale($lang);
+    return view('upload');
+});
